@@ -17,6 +17,7 @@ import Loader from "../ui/loader";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "../ui/separator";
 import { useDeviceType } from "@/hooks/useDeviceType";
+import Brand from "../appComponents/brand";
 
 const LoginComponent = () => {
     const [loginLoading, setLoginLoading] = useState<boolean>(false);
@@ -124,7 +125,7 @@ const LoginComponent = () => {
                     {/* Left Panel: Hide on mobile */}
                     {!isMobile && (
                         <div className={leftPanelClass}>
-                            <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> RaunaCart</div>
+                            <Brand/>
                             <div className={leftPanelTextClass}>
                                 {messages[Math.floor(Math.random() * messages.length)].split(",")[0]}
                                 <br />

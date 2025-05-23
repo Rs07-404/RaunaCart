@@ -15,6 +15,7 @@ import { useDeviceType } from "@/hooks/useDeviceType";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/config/firebase/config";
 import { toast } from "sonner";
+import Brand from "../appComponents/brand";
 
 const SignupComponent = () => {
     const navigateTo = useNavigate();
@@ -135,7 +136,7 @@ const SignupComponent = () => {
                     {/* Left Panel: Hidden on mobile */}
                     {!isMobile && (
                         <div className={leftPanelClass}>
-                            <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> RaunaCart</div>
+                            <Brand/>
                             <div className={leftPanelTextClass}>
                                 {messages[Math.floor(Math.random() * messages.length)].split(",")[0]}
                                 <br />

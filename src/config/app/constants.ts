@@ -1,0 +1,1 @@
+export const APP_NAME = import.meta.env.VITE_PLATFORM_NAME || "RaunaCart";

@@ -1,11 +1,18 @@
 import './App.css'
+import { Toaster } from './components/ui/sonner'
+import { APP_NAME } from './config/app/constants'
+import AppRoutes from './routes/appRoutes'
 
 function App() {
 
   return (
-    <div className="flex w-full justify-center">
-      RaunaCart
-    </div>
+    <>
+    <head>
+      <title>{APP_NAME}</title>
+    </head>
+    <AppRoutes />
+    <Toaster />
+    </>
   )
 }
 

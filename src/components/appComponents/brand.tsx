@@ -17,7 +17,7 @@ import type { JSX } from "react";
 const Brand = ():JSX.Element => {
     return (
         <div>
-            <div className="sniglet w-full text-center text-[24px] flex gap-1 justify-center items-center">
+            <div className="sniglet text-center text-[24px] flex gap-1 justify-center items-center">
                 <ShoppingBag /> {APP_NAME}
             </div>
         </div>

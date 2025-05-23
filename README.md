@@ -92,7 +92,7 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-- The app will be available at [http://localhost:5173](http://localhost:5173) (or your chosen port).
+- The app will be available at [http://localhost](http://localhost) (or your chosen port).
 
 ---
 

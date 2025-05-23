@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import type { Product } from "@/types/IProduct";
 import useCart from "@/hooks/useCart";
+import { useDeviceType } from "@/hooks/useDeviceType";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -20,6 +21,10 @@ const Home = () => {
     const location = useLocation();
     const currentPath = location.pathname;
     const categoryFromPath = currentPath.split("/")[1]?.toLowerCase();
+
+    // UI Configs
+    const deviceType = useDeviceType();
+    const isMobile = deviceType === "mobile";
 
 
     const fetchProducts = async () => {
@@ -47,7 +52,6 @@ const Home = () => {
 
     const filteredProducts = products.filter((product: Product) => {
         const matchesCategory = currentPath !== "/" && product.category.toLowerCase().includes(categoryFromPath);
-        console.log(product.category, categoryFromPath);
         const matchesSearch = product.title
             .toLowerCase()
             .includes(searchQuery.toLowerCase());
@@ -62,7 +66,7 @@ const Home = () => {
         <>
             <div className="w-full flex justify-center items-center">{categoryFromPath.length > 0 ? categoryFromPath.slice(0)[0].toUpperCase() + categoryFromPath.slice(1) : "Home"}</div>
             <div className="w-full flex justify-center items-center mt-2">
-                <div className="flex relative w-[30%] justify-center items-center">
+                <div className={`flex relative ${isMobile ? "w-[80%]": "w-[30%]"} justify-center items-center`}>
                     <Input
                         type="text"
                         placeholder="Search for products..."
@@ -75,8 +79,8 @@ const Home = () => {
             </div>
             <div className="grid sm:grid-cols-3 grid-cols-1 md:grid-cols-4 lg:grid-cols-4 p-12">
                 {loading &&
-                    Array.from({ length: 8 }).map(() =>
-                        <Skeleton className="p-4 border m-2 h-102 overflow-hidden shadow-sm">
+                    Array.from({ length: 8 }).map((_, index) =>
+                        <Skeleton key={index} className="p-4 border m-2 h-102 overflow-hidden shadow-sm">
                             <div className="w-full h-48 bg-gray-200 animate-pulse"></div>
                             <div className="flex">
                                 <h2 className="text-lg h-20 font-bold text-wrap truncate bg-gray-200 animate-pulse"></h2>
@@ -103,8 +107,9 @@ const Home = () => {
                             }}
                             whileHover={{ scale: 1.05 }}
                             layout
+                            key={product.id}
                         >
-                            <Card key={product.id} className="p-4 relative border m-2 h-102 overflow-hidden">
+                            <Card className="p-4 relative border m-2 h-102 overflow-hidden">
                                 <img src={product.image} alt={product.title} className="w-full h-48 object-cover" />
                                 <div className="flex">
                                     <h2 className="text-lg h-20 font-bold text-wrap truncate">{product.title}</h2>

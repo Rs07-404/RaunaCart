@@ -25,31 +25,37 @@ const Header = () => {
 
     const paths = [
         {
+            id:1,
             PathLabel: "Home",
             PathEndpoint: "/",
             PathIcon: Home,
         },
         {
+            id:2,
             PathLabel: "Clothes",
             PathEndpoint: "/clothing",
             PathIcon: Shirt,
         },
         {
+            id:3,
             PathLabel: "Electronics",
             PathEndpoint: "/electronics",
             PathIcon: Plug,
         },
         {
+            id:4,
             PathLabel: "Furnitures",
             PathEndpoint: "/furnitures",
             PathIcon: Sofa,
         },
         {
+            id:5,
             PathLabel: "Toys",
             PathEndpoint: "/toys",
             PathIcon: Shapes,
         },
         {
+            id:6,
             PathLabel: "Jewelery",
             PathEndpoint: "/jewelery",
             PathIcon: Gem,
@@ -57,11 +63,11 @@ const Header = () => {
     ]
 
     return (
-        <header className="bg-header fixed w-full z-1000 left-0 top-0 border bg-card flex items-center gap-2 text-header-text p-2 py-4">
+        <header className="bg-header fixed w-full z-1000 left-0 top-0 border bg-card/80 backdrop-blur-2xl flex items-center gap-2 text-header-text p-2 py-4">
             {!isMobile && <Brand />}
             <nav className="flex gap-4 [&>*]:text-[16px] [&>a]:cursor-pointer [&>a]:hover:text-[18px] [&>a]:transition-all [&>a]:hover:underline">
                 {paths.map((path)=>
-                <a onClick={() => { navigateTo(path.PathEndpoint) }} className={`text-lg ${currentPath == path.PathEndpoint && "text-primary"}`}>{isMobile ? <path.PathIcon /> : path.PathLabel}</a>
+                <a key={path.id} onClick={() => { navigateTo(path.PathEndpoint) }} className={`text-lg ${currentPath == path.PathEndpoint && "text-primary"}`}>{isMobile ? <path.PathIcon /> : path.PathLabel}</a>
                 )}
             </nav>
 

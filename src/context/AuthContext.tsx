@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     setLoading(true);
     const unsub = onAuthStateChanged(auth, (firebaseUser) => {
-      console.log("Firebase Auth Changed:", firebaseUser);
       setUser(firebaseUser);
       setLoading(false);
     });

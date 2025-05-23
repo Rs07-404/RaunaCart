@@ -116,6 +116,51 @@ src/
 
 ---
 
+## Google OAuth Troubleshooting
+
+If Google OAuth is not working even after providing the default client ID, you may need to create your own OAuth 2.0 Client ID in Google Cloud Console.
+
+### How to Create Your Own Google OAuth Client ID
+
+1. **Go to the Google Cloud Console:**  
+   [https://console.cloud.google.com/apis](https://console.cloud.google.com/apis)
+
+2. **Select your project** (or create a new one if needed).
+
+3. **Enable the "Google Identity Services" API**  
+   - In the left sidebar, go to **APIs & Services > Library**.
+   - Search for "Google Identity Services" and enable it.
+
+4. **Configure OAuth consent screen**  
+   - In the left sidebar, go to **APIs & Services > OAuth consent screen**.
+   - Choose "External" and fill in the required information (app name, support email, etc.).
+   - Add your email as a test user if the app is in testing.
+
+5. **Create OAuth 2.0 Client ID**  
+   - Go to **APIs & Services > Credentials**.
+   - Click **Create Credentials > OAuth client ID**.
+   - Choose **Web application**.
+   - Set a name (e.g., "RaunaCart Web Client").
+   - Under **Authorized JavaScript origins**, add:
+     - `http://localhost` (and/or your development port, e.g., `http://localhost:5173`)
+     - Your production domain if deployed
+   - Under **Authorized redirect URIs**, you can leave this blank for Google One Tap or add as needed.
+
+6. **Copy the generated Client ID**  
+   - After creation, copy the **Client ID**.
+
+7. **Update your `.env` file**  
+   - Set `VITE_FIREBASE_WEB_CLIENT_ID` in your `.env` file to the new client ID you just created.
+
+   ```
+   VITE_FIREBASE_WEB_CLIENT_ID=your_new_client_id
+   ```
+
+8. **Restart your development server**  
+   - Stop and restart your dev server to apply the new environment variable.
+
+---
+
 ## Troubleshooting
 
 - **Firebase errors:** Double-check your `.env` values and that your Firebase project is set up correctly.

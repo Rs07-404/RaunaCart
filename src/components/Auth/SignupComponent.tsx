@@ -15,9 +15,35 @@ import { useDeviceType } from "@/hooks/useDeviceType";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/config/firebase/config";
 import { toast } from "sonner";
-import Brand from "../appComponents/brand";
+import { APP_NAME } from "@/config/app/constants";
+import type { JSX } from "react";
 
-const SignupComponent = () => {
+
+/**
+ * SignupComponent renders the sign-up dialog for new users to create an account.
+ * 
+ * This component provides a responsive sign-up form with email/password registration,
+ * Google sign-in, and real-time validation using react-hook-form and Zod schema validation.
+ * It displays a visually appealing layout with a left panel for branding and messaging
+ * (hidden on mobile) and a right panel for the form.
+ * 
+ * Features:
+ * - Responsive design for mobile, tablet, and desktop.
+ * - Email/password registration with Firebase authentication.
+ * - Google sign-in integration.
+ * - Real-time form validation and error handling.
+ * - Toast notifications for success and error feedback.
+ * - Navigation to login page after successful registration.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <SignupComponent />
+ * ```
+ * 
+ * @returns {JSX.Element} The rendered sign-up dialog component.
+ */
+const SignupComponent = ():JSX.Element => {
     const navigateTo = useNavigate();
     const deviceType = useDeviceType();
 
@@ -136,7 +162,7 @@ const SignupComponent = () => {
                     {/* Left Panel: Hidden on mobile */}
                     {!isMobile && (
                         <div className={leftPanelClass}>
-                            <Brand/>
+                            <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> {APP_NAME}</div>
                             <div className={leftPanelTextClass}>
                                 {messages[Math.floor(Math.random() * messages.length)].split(",")[0]}
                                 <br />
@@ -151,7 +177,7 @@ const SignupComponent = () => {
                     <div className={rightPanelClass}>
                         <Form {...signupForm}>
                             <form onSubmit={signupForm.handleSubmit(handleEmailSigup)} className={formClass}>
-                                {isMobile && <div className="sniglet w-full text-center text-[24px] flex gap-1 justify-center items-center"><ShoppingBag /> RaunaCart</div>}
+                                {isMobile && <div className="sniglet w-full text-center text-[24px] flex gap-1 justify-center items-center"><ShoppingBag /> {APP_NAME}</div>}
                                 <h1 className="text-2xl font-bold text-center">Sign Up</h1>
                                 <div className={formInnerClass}>
                                     <div className={inputGroupClass}>

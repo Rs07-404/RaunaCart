@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type JSX } from "react";
 import { auth, firebaseConfig } from "@/config/firebase/config";
 import { signInWithCredential, GoogleAuthProvider } from "firebase/auth";
 import { toast } from "sonner";
@@ -18,7 +18,24 @@ declare global {
   }
 }
 
-const GoogleSignIn: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+/**
+ * GoogleSignIn React component renders a Google Sign-In button and handles authentication using Firebase.
+ *
+ * @component
+ * @param {React.HTMLAttributes<HTMLDivElement>} props - Additional props and className for the container div.
+ * @returns {JSX.Element} The rendered Google Sign-In button.
+ *
+ * @remarks
+ * - Initializes the Google Identity Services button on mount.
+ * - Handles the Google credential response and signs in the user with Firebase Authentication.
+ * - Displays toast notifications for success or error states.
+ *
+ * @example
+ * ```tsx
+ * <GoogleSignIn className="my-custom-class" />
+ * ```
+ */
+const GoogleSignIn: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }):JSX.Element => {
   useEffect(() => {
     if (!window.google || auth.currentUser) return;
 

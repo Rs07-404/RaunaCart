@@ -12,14 +12,33 @@ import GoogleSignIn from "./GoogleSingInButton";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase/config";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import Loader from "../ui/loader";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "../ui/separator";
 import { useDeviceType } from "@/hooks/useDeviceType";
-import Brand from "../appComponents/brand";
+import { APP_NAME } from "@/config/app/constants";
 
-const LoginComponent = () => {
+
+/**
+ * LoginComponent renders the login dialog for user authentication.
+ *
+ * This component provides a responsive login form with email/password authentication
+ * and Google sign-in integration. It displays a visually appealing card layout with
+ * dynamic welcome messages and adapts its UI for mobile, tablet, and desktop devices.
+ *
+ * Features:
+ * - Email/password login using Firebase Authentication.
+ * - Google sign-in button.
+ * - Responsive design for mobile, tablet, and desktop.
+ * - Dynamic welcome messages.
+ * - Error handling with user-friendly toast notifications.
+ * - Navigation to the sign-up page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered login dialog component.
+ */
+const LoginComponent = ():JSX.Element => {
     const [loginLoading, setLoginLoading] = useState<boolean>(false);
     const navigateTo = useNavigate();
     const deviceType = useDeviceType();
@@ -125,7 +144,7 @@ const LoginComponent = () => {
                     {/* Left Panel: Hide on mobile */}
                     {!isMobile && (
                         <div className={leftPanelClass}>
-                            <Brand/>
+                            <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> {APP_NAME}</div>
                             <div className={leftPanelTextClass}>
                                 {messages[Math.floor(Math.random() * messages.length)].split(",")[0]}
                                 <br />
@@ -140,7 +159,7 @@ const LoginComponent = () => {
                     <div className={rightPanelClass}>
                         <Form {...loginForm}>
                             <form onSubmit={loginForm.handleSubmit(handleEmailLogin)} className={formClass}>
-                                {isMobile && <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> RaunaCart</div>}
+                                {isMobile && <div className="sniglet w-full text-white text-[24px] flex gap-1 items-center"><ShoppingBag /> {APP_NAME}</div>}
                                 <h1 className="text-2xl font-bold text-center">Login</h1>
                                 <div className={formInnerClass}>
                                     {/* Login with Email Form */}

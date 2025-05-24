@@ -9,6 +9,28 @@ import Brand from "./brand";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 
+
+/**
+ * Header component for the E-commerce application.
+ *
+ * Renders the top navigation bar, including:
+ * - Brand logo (on non-mobile devices)
+ * - Navigation links to main product categories
+ * - Cart and orders icons with cart item count badge
+ * - User email (on non-mobile devices)
+ * - User avatar with fallback initials
+ * - Logout button and loading indicator
+ *
+ * Uses authentication context, Redux for cart state, and device type detection.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered header component.
+ *
+ * @example
+ * ```tsx
+ * <Header />
+ * ```
+ */
 const Header = () => {
     const { user, loading } = useAuth();
     const navigateTo = useNavigate();
